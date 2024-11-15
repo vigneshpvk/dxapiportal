@@ -7,11 +7,16 @@ export const getAccessToken = async () => {
   // intialize access Token
 
   const tokenUrl = "https://localhost:8443/prweb/PRRestService/oauth2/v1/token"; // Replace with your OAuth token URL
-  const clientId = "13719064817575839253"; // Replace with your client ID
-  const clientSecret = "239F3D9AA56C51581A9EBB2FDB498F2A"; // Replace with your client secret
+  const clientId = "27880699011854240883"; // Replace with your client ID
+  const clientSecret = "CEF7C6DBF237C959B65A4D9E66DABDD0"; // Replace with your client secret
+  const grantType = "password"; // use password or client_credentials
+  const username = "developer";
+  const password = "rules";
 
   const params = new URLSearchParams();
-  params.append("grant_type", "client_credentials");
+  params.append("grant_type", grantType);
+  params.append("username", username);
+  params.append("password", password);
   params.append("client_id", clientId);
   params.append("client_secret", clientSecret);
 

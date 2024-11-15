@@ -40,7 +40,7 @@ const Mywork = () => {
       includeTotalCount: true,
       paging: {
         pageNumber: 1,
-        pageSize: 41,
+        pageSize: 100,
       },
       query: {
         select: [
@@ -85,7 +85,7 @@ const Mywork = () => {
     getworklist();
   }, []);
 
-  // Defining columns
+  // Defining columns for My Cases
 
   const columns = [
     {
@@ -156,6 +156,62 @@ const Mywork = () => {
     rows.push(temp);
   });
 
+  // Defining my Approvals
+
+  const approvalColumns = [
+    {
+      field: "id",
+      headerName: "Case ID",
+      flex: 0.4,
+      headerAlign: "center",
+    },
+    { field: "task", headerName: "Task", flex: 0.8, headerAlign: "center" },
+    {
+      field: "casetype",
+      headerName: "Case Type",
+      flex: 0.7,
+      headerAlign: "center",
+    },
+
+    {
+      field: "status",
+      headerName: "Case Status",
+      flex: 0.8,
+      headerAlign: "center",
+    },
+    {
+      field: "duedate",
+      headerName: "Approver",
+      flex: 0.5,
+      headerAlign: "center",
+    },
+    {
+      field: "caseurgency",
+      headerName: "Approved Date",
+      flex: 0.6,
+      headerAlign: "center",
+    },
+    {
+      field: "action",
+      headerName: "Action",
+      flex: 0.5,
+      headerAlign: "center",
+      renderCell: () => {
+        return (
+          <strong>
+            <Button
+              variant="contained"
+              color="success"
+              endIcon={<PlayArrowIcon />}
+            >
+              Open
+            </Button>
+          </strong>
+        );
+      },
+    },
+  ];
+
   return (
     <Box display="flex" flexDirection="column">
       <Header title="My work" subtitle="List of Pending works" />
@@ -187,64 +243,68 @@ const Mywork = () => {
       </Box>
 
       {/* My cases UI */}
-      <Box
-        height="70vh"
-        mt={2}
-        width={isSidebarCollapsed ? "89vw" : "77vw"}
-        sx={{
-          "& .MuiDataGrid-columnHeader": {
-            backgroundColor: colors.purple[400],
-          },
-          "& .MuiDataGrid-cell ": {
-            fontSize: "14px",
-          },
-          "& .MuiDataGrid-columnHeaderTitle": {
-            fontSize: "14px",
-            fontWeight: "bolder",
-          },
-          "& .MuiButton-sizeSmall": {
-            color: colors.blueAccent[400],
-          },
-        }}
-      >
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          slots={{
-            toolbar: GridToolbar,
+      {value === "mycases" && (
+        <Box
+          height="70vh"
+          mt={2}
+          width={isSidebarCollapsed ? "89vw" : "77vw"}
+          sx={{
+            "& .MuiDataGrid-columnHeader": {
+              backgroundColor: colors.purple[400],
+            },
+            "& .MuiDataGrid-cell ": {
+              fontSize: "14px",
+            },
+            "& .MuiDataGrid-columnHeaderTitle": {
+              fontSize: "14px",
+              fontWeight: "bolder",
+            },
+            "& .MuiButton-sizeSmall": {
+              color: colors.blueAccent[400],
+            },
           }}
-        />
-      </Box>
+        >
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            slots={{
+              toolbar: GridToolbar,
+            }}
+          />
+        </Box>
+      )}
 
       {/* My Approval UI */}
-      <Box
-        height="70vh"
-        mt={2}
-        width={isSidebarCollapsed ? "89vw" : "77vw"}
-        sx={{
-          "& .MuiDataGrid-columnHeader": {
-            backgroundColor: colors.purple[400],
-          },
-          "& .MuiDataGrid-cell ": {
-            fontSize: "14px",
-          },
-          "& .MuiDataGrid-columnHeaderTitle": {
-            fontSize: "14px",
-            fontWeight: "bolder",
-          },
-          "& .MuiButton-sizeSmall": {
-            color: colors.blueAccent[400],
-          },
-        }}
-      >
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          slots={{
-            toolbar: GridToolbar,
+      {value === "myapproval" && (
+        <Box
+          height="70vh"
+          mt={2}
+          width={isSidebarCollapsed ? "89vw" : "77vw"}
+          sx={{
+            "& .MuiDataGrid-columnHeader": {
+              backgroundColor: colors.purple[400],
+            },
+            "& .MuiDataGrid-cell ": {
+              fontSize: "14px",
+            },
+            "& .MuiDataGrid-columnHeaderTitle": {
+              fontSize: "14px",
+              fontWeight: "bolder",
+            },
+            "& .MuiButton-sizeSmall": {
+              color: colors.blueAccent[400],
+            },
           }}
-        />
-      </Box>
+        >
+          <DataGrid
+            rows={rows}
+            columns={approvalColumns}
+            slots={{
+              toolbar: GridToolbar,
+            }}
+          />
+        </Box>
+      )}
     </Box>
   );
 };

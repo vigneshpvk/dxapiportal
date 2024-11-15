@@ -15,10 +15,12 @@ import Grid from "@mui/material/Grid2";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { tokens } from "../themes";
 import { useState } from "react";
+import { CssBaseline } from "@mui/material";
 const Profile = () => {
   // obtain colors
+
   const theme = useTheme();
-  const colors = tokens(theme.palette.color);
+  const colors = tokens(theme.palette.mode);
   // Gender Value
   const [genderValue, setGenderValue] = useState("Male");
   const [countryValue, setCountryValue] = useState("India");
@@ -27,7 +29,7 @@ const Profile = () => {
   return (
     <Box>
       <Header title="Profile" subtitle="Provides your complete Information" />
-      <Box padding="25px 70px" bgcolor={colors.primary[400]}>
+      <Box padding="25px 70px" bgcolor={colors.primary[400]} mt={2}>
         <Grid container columnSpacing={10} rowSpacing={3}>
           {/* First Name , Last Name & Email*/}
           <Grid size={4}>
